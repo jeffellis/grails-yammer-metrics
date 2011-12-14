@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'com.rallydev.analytics.gradle', name: 'gradle-rally-build-info', version: '0.1.7'
+        classpath group: 'com.rallydev.analytics.gradle', name: 'gradle-rally-build-info', version: '0.1.8'
     }
 }
 
