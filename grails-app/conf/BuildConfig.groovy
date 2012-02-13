@@ -14,8 +14,8 @@ grails.project.dependency.resolution = {
 	//
 	// Here is where we will publish ourselves to in nexus
 	//
-	grails.project.repos.rally.url 	= "http://alm-build.f4tech.com:8080/nexus/content/repositories/releases/"
-	grails.project.repos.default 	= "rally"
+//	grails.project.repos.rally.url 	= "http://alm-build.f4tech.com:8080/nexus/content/repositories/releases/"
+//	grails.project.repos.default 	= "rally"
 	
 	
     repositories {
@@ -23,12 +23,13 @@ grails.project.dependency.resolution = {
         grailsHome()
         grailsCentral()
 
-//		mavenRepo "http://repo.codahale.com"
 
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
+        mavenLocal()
+        mavenCentral()
+        //mavenRepo "http://repo.codahale.com"
+
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -43,7 +44,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-//		runtime 'com.yammer.metrics:metrics-core:2.0.0-BETA18-SNAPSHOT'
-//		runtime 'com.yammer.metrics:metrics-servlet:2.0.0-BETA18-SNAPSHOT'
+		compile 'com.yammer.metrics:metrics-core:2.0.2'
+		compile 'com.yammer.metrics:metrics-servlet:2.0.2'
     }
 }

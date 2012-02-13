@@ -3,7 +3,7 @@ class YammerMetricsGrailsPlugin {
 	String groupId = 'com.rallydev.plugins.grails'
 
     // the plugin version
-    def version = "0.2"
+    def version = "2.0.2"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.3.7 > *"
     // the other plugins this plugin depends on
@@ -21,6 +21,10 @@ class YammerMetricsGrailsPlugin {
 Provides the following features:
    * metrics-core
    * metrics-servlet (wired to the /metrics end point for the app).
+
+For detailed documentation on the yammer metrics package see:
+
+http://metrics.codahale.com/index.html
 '''
 
     // URL to the plugin's documentation

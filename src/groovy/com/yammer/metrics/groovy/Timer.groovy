@@ -5,16 +5,16 @@ import com.yammer.metrics.core.TimerContext
 import java.util.concurrent.TimeUnit
 import org.apache.commons.logging.LogFactory
 
-class TimerMetric {
+class Timer {
 
-	@Delegate private com.yammer.metrics.core.TimerMetric timerMetric
+	@Delegate private com.yammer.metrics.core.Timer timerMetric
 	String owner
 	String name
 
-	private static final log = LogFactory.getLog( com.yammer.metrics.groovy.TimerMetric )
+	private static final log = LogFactory.getLog( com.yammer.metrics.groovy.Timer )
 	private ownerLog
 
-	TimerMetric( Class<?> owner, String name ) {
+	Timer( Class<?> owner, String name ) {
 		this.owner = owner.name
 		this.name = name
 
