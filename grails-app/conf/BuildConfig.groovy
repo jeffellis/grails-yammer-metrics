@@ -2,6 +2,9 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
+
+yammermetrics.version = "2.1.1"
+
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
@@ -44,7 +47,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-		compile 'com.yammer.metrics:metrics-core:2.0.2'
-		compile 'com.yammer.metrics:metrics-servlet:2.0.2'
+		compile "com.yammer.metrics:metrics-core:${yammermetrics.version}"
+		compile "com.yammer.metrics:metrics-servlet:${yammermetrics.version}"
     }
 }

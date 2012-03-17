@@ -3,7 +3,7 @@ class YammerMetricsGrailsPlugin {
 	String groupId = 'com.rallydev.plugins.grails'
 
     // the plugin version
-    def version = "2.0.2"
+    def version = "2.1.1"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.3.7 > *"
     // the other plugins this plugin depends on
