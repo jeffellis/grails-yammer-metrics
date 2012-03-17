@@ -40,7 +40,7 @@ http://metrics.codahale.com/index.html
 			servletElement + {
 				'servlet' {
 					'servlet-name'("YammerMetrics")
-					'servlet-class'("com.yammer.metrics.reporting.MetricsServlet")
+					'servlet-class'("com.yammer.metrics.reporting.AdminServlet")
 				}
 			}
 			println "***\nYammerMetrics servlet injected into web.xml"
@@ -56,7 +56,7 @@ http://metrics.codahale.com/index.html
 					'url-pattern'("/metrics/*")
 				}
 			}
-			println "YammerMetrics servlet filter-mapping (for /metrics/*) injected into web.xml\n***"
+			println "YammerMetrics Admin servlet filter-mapping (for /metrics/*) injected into web.xml\n***"
 		}
 
     }
