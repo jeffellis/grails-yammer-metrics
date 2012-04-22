@@ -1,9 +1,8 @@
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
-//grails.project.war.file = "target/${appName}-${appVersion}.war"
 
-yammermetrics.version = "2.1.1"
+yammermetrics.version = "2.1.2"
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -12,13 +11,6 @@ grails.project.dependency.resolution = {
         // excludes 'ehcache'
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
-	
-	
-	//
-	// Here is where we will publish ourselves to in nexus
-	//
-//	grails.project.repos.rally.url 	= "http://alm-build.f4tech.com:8080/nexus/content/repositories/releases/"
-//	grails.project.repos.default 	= "rally"
 	
 	
     repositories {
@@ -31,12 +23,6 @@ grails.project.dependency.resolution = {
         // from public Maven repositories
         mavenLocal()
         mavenCentral()
-        //mavenRepo "http://repo.codahale.com"
-
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
     }
 	
 	plugins {
@@ -49,5 +35,6 @@ grails.project.dependency.resolution = {
 
 		compile "com.yammer.metrics:metrics-core:${yammermetrics.version}"
 		compile "com.yammer.metrics:metrics-servlet:${yammermetrics.version}"
+
     }
 }
