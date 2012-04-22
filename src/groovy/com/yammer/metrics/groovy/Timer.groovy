@@ -1,3 +1,6 @@
+/*
+ * Copyright 2012 Jeff Ellis
+ */
 package com.yammer.metrics.groovy
 
 import com.yammer.metrics.Metrics

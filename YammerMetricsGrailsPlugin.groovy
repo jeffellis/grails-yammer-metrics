@@ -1,21 +1,25 @@
+/*
+ * Copyright 2012 Jeff Ellis
+ */
 class YammerMetricsGrailsPlugin {
 
 	String groupId = 'com.rallydev.plugins.grails'
 
     // the plugin version
-    def version = "2.1.2"
+    def version = "2.1.2-1"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.3.7 > *"
     // the other plugins this plugin depends on
     def dependsOn = [:]
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
-            "grails-app/views/error.gsp"
+            "grails-app/views",
+            "web-app/**"
     ]
 
     // TODO Fill in these fields
     def author = "Jeff Ellis"
-    def authorEmail = "jellis@rallydev.com"
+    def authorEmail = "codemonkey@ellises.us"
     def title = "Grails plugin to package Coda Hale's yammer metrics jars"
     def description = '''\\
 Provides the following features:
