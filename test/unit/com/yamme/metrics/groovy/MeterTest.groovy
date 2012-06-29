@@ -33,13 +33,13 @@ class MeterTest extends GroovyTestCase {
     //Not going crazy testing the yammer code, just want to ensure that our AST is functioning.
     void testCallingMeteredMethod(){
 
-        def init = sample.multiMetricMeter.count.longValue()
+        def init = sample.meteredMeter.count.longValue()
         def callCount = 10
         callCount.times {
             sample.metered()
         }
         Meter meter = sample.meteredMeter
-        assertEquals("We should see ${callCount} calls on our meter", callCount+init, meter.count() )
+        assertEquals("We should see ${callCount+init} calls on our meter", callCount+init, meter.count() )
     }
 
     void testCountsSpanInstances(){

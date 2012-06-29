@@ -5,8 +5,11 @@ Provides the following features:
    * metrics-core
    * metrics-servlet
 
-This plugin wires the AdminServlet to the /metrics endpoint in the including application.
-
+This plugin wires the AdminServlet to the /metrics endpoint in the including application. To disable this functionality,
+add the following to the application's Config:
+'''
+    metrics.servletEnabled = false
+'''
 For detailed documentation on the yammer metrics package see:
 
 http://metrics.codahale.com/index.html
