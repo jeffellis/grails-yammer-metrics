@@ -34,33 +34,36 @@ http://metrics.codahale.com/index.html
 
     def doWithWebDescriptor = { xml ->
 
-		def count = xml.'servlet'.size()
-		if(count > 0) {
+        if(application.config.metrics.servletEnabled!=false){
+            def count = xml.'servlet'.size()
+            if(count > 0) {
 
-			def servletElement = xml.'servlet'[count - 1]
+                def servletElement = xml.'servlet'[count - 1]
 
-			servletElement + {
-				'servlet' {
-					'servlet-name'("YammerMetrics")
-					'servlet-class'("com.yammer.metrics.reporting.AdminServlet")
-				}
-			}
-			println "***\nYammerMetrics servlet injected into web.xml"
-		}
+                servletElement + {
+                    'servlet' {
+                        'servlet-name'("YammerMetrics")
+                        'servlet-class'("com.yammer.metrics.reporting.AdminServlet")
+                    }
+                }
+                println "***\nYammerMetrics servlet injected into web.xml"
+            }
 
-		count = xml.'servlet-mapping'.size()
-		if(count > 0) {
-			def servletMappingElement = xml.'servlet-mapping'[count - 1]
-			servletMappingElement + {
+            count = xml.'servlet-mapping'.size()
+            if(count > 0) {
+                def servletMappingElement = xml.'servlet-mapping'[count - 1]
+                servletMappingElement + {
 
-				'servlet-mapping' {
-					'servlet-name'("YammerMetrics")
-					'url-pattern'("/metrics/*")
-				}
-			}
-			println "YammerMetrics Admin servlet filter-mapping (for /metrics/*) injected into web.xml\n***"
-		}
-
+                    'servlet-mapping' {
+                        'servlet-name'("YammerMetrics")
+                        'url-pattern'("/metrics/*")
+                    }
+                }
+                println "YammerMetrics Admin servlet filter-mapping (for /metrics/*) injected into web.xml\n***"
+            }
+        } else{
+            println "Skipping YammerMetrics Admin servlet mapping\n***"
+        }
     }
 
     def doWithSpring = {
