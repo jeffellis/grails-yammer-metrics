@@ -30,7 +30,7 @@ http://metrics.codahale.com/index.html
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/yammer-metrics"
+    def documentation = "http://github.com/jeffellis/grails-yammer-metrics"
 
     def doWithWebDescriptor = { xml ->
 
