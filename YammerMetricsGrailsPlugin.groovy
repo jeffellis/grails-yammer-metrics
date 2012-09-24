@@ -4,7 +4,7 @@
 class YammerMetricsGrailsPlugin {
 
 	// the plugin version
-    def version = "2.1.2-2"
+    def version = "2.1.2-3"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.0.3 > *"
     // the other plugins this plugin depends on
@@ -43,7 +43,7 @@ http://metrics.codahale.com/index.html
                 servletElement + {
                     'servlet' {
                         'servlet-name'("YammerMetrics")
-                        'servlet-class'("com.yammer.metrics.reporting.AdminServlet")
+                        'servlet-class'("com.yammer.metrics.reporting.GrailsAdminServlet")
                     }
                 }
                 println "***\nYammerMetrics servlet injected into web.xml"
@@ -59,7 +59,7 @@ http://metrics.codahale.com/index.html
                         'url-pattern'("/metrics/*")
                     }
                 }
-                println "YammerMetrics Admin servlet filter-mapping (for /metrics/*) injected into web.xml\n***"
+                println "YammerMetrics Admin servlet-mapping (for /metrics/*) injected into web.xml\n***"
             }
         } else{
             println "Skipping YammerMetrics Admin servlet mapping\n***"

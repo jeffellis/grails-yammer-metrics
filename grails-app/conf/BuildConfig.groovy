@@ -38,7 +38,12 @@ grails.project.dependency.resolution = {
             export = false
         }
 
-	}
+        build ':codenarc:0.17', {
+            export = false
+        }
+
+
+    }
 	
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
