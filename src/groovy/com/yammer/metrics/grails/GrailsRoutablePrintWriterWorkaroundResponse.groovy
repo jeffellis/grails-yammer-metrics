@@ -1,4 +1,4 @@
-package com.yammer.metrics.reporting
+package com.yammer.metrics.grails
 
 import javax.servlet.http.HttpServletResponse
 import org.codehaus.groovy.grails.web.sitemesh.GrailsRoutablePrintWriter
