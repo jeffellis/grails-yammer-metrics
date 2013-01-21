@@ -1,6 +1,6 @@
-package com.yammer.metrics.groovy.ast
+package org.grails.plugins.yammermetrics.groovy.ast
 
-import com.yammer.metrics.groovy.GroovierMetrics
+import org.grails.plugins.yammermetrics.groovy.GroovierMetrics
 import org.apache.log4j.Logger
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement

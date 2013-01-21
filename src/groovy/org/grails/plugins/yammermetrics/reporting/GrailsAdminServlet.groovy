@@ -1,4 +1,9 @@
-package com.yammer.metrics.reporting
+package org.grails.plugins.yammermetrics.reporting
+
+import com.yammer.metrics.reporting.AdminServlet
+import com.yammer.metrics.reporting.MetricsServlet
+import com.yammer.metrics.reporting.PingServlet
+import com.yammer.metrics.reporting.ThreadDumpServlet
 
 class GrailsAdminServlet extends AdminServlet {
 

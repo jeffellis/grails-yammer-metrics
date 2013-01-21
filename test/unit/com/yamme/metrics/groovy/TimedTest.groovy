@@ -19,7 +19,7 @@ class TimedTest extends GroovyTestCase {
         def timer = sample.hasProperty('timedTimer')?sample.timedTimer : null
         assertNotNull("We should generate 'timedTimer' for timed() :> ${sample.dump()}", timer)
         if(!timer instanceof Timer){
-            fail("We should generate a com.yammer.metrics.groovy.Timer for timed()  :> ${sample.dump()}")
+            fail("We should generate a Timer for timed()  :> ${sample.dump()}")
         }
     }
 

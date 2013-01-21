@@ -1,8 +1,8 @@
 package com.yamme.metrics.groovy
 
-import com.yammer.metrics.groovy.GroovierMetrics
-import com.yammer.metrics.groovy.Metered
-import com.yammer.metrics.groovy.Timed
+import org.grails.plugins.yammermetrics.groovy.GroovierMetrics
+import org.grails.plugins.yammermetrics.groovy.Metered
+import org.grails.plugins.yammermetrics.groovy.Timed
 
 class SampleObject {
 

@@ -1,7 +1,7 @@
 /*
  * Copyright 2012 Jeff Ellis
  */
-package com.yammer.metrics.groovy
+package org.grails.plugins.yammermetrics.groovy
 
 import com.yammer.metrics.Metrics
 import com.yammer.metrics.core.TimerContext
@@ -14,7 +14,7 @@ class Timer {
 	String owner
 	String name
 
-	private static final log = LogFactory.getLog( com.yammer.metrics.groovy.Timer )
+	private static final log = LogFactory.getLog( Timer )
 	private ownerLog
 
 	Timer( Class<?> owner, String name ) {

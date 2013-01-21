@@ -43,7 +43,7 @@ http://metrics.codahale.com/index.html
                 servletElement + {
                     'servlet' {
                         'servlet-name'("YammerMetrics")
-                        'servlet-class'("com.yammer.metrics.reporting.GrailsAdminServlet")
+                        'servlet-class'("org.grails.plugins.yammermetrics.reporting.GrailsAdminServlet")
                     }
                 }
                 println "***\nYammerMetrics servlet injected into web.xml"

@@ -1,8 +1,9 @@
-package com.yammer.metrics.reporting
+package org.grails.plugins.yammermetrics.reporting
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import javax.servlet.ServletException
+import com.yammer.metrics.reporting.HealthCheckServlet
 
 class GrailsHealthCheckServlet extends HealthCheckServlet {
 

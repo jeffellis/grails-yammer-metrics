@@ -1,4 +1,4 @@
-package com.yammer.metrics.groovy
+package org.grails.plugins.yammermetrics.groovy
 
 import com.yammer.metrics.Metrics
 import org.codehaus.groovy.reflection.ReflectionUtils
