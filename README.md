@@ -47,7 +47,7 @@ class SomeService{
 Timed the Grails Way
 ```
 class SomeService{
-  @com.yammer.metrics.groovy.Timed
+  @org.grails.plugins.yammermetrics.groovy.Timed
   public String serve(def foo, def bar) {
     return "OK"
   }
@@ -83,7 +83,7 @@ Metered the Grails Way
 ```
 class SomeService{
 
-  @com.yammer.metrics.groovy.Meter
+  @org.grails.plugins.yammermetrics.groovy.Meter
   public String serve(def foo, def bar) {
     return "OK"
   }

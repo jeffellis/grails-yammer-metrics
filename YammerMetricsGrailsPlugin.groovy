@@ -4,7 +4,7 @@
 class YammerMetricsGrailsPlugin {
 
 	// the plugin version
-    def version = "2.1.2-3"
+    def version = "2.1.2-4"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.0.3 > *"
     // the other plugins this plugin depends on
@@ -15,7 +15,6 @@ class YammerMetricsGrailsPlugin {
             "web-app/**"
     ]
 
-    // TODO Fill in these fields
     def author = "Jeff Ellis"
     def authorEmail = "codemonkey@ellises.us"
     def title = "Grails plugin to package Coda Hale's yammer metrics jars"
@@ -24,9 +23,7 @@ Provides the following features:
    * metrics-core
    * metrics-servlet (wired to the /metrics end point for the app).
 
-For detailed documentation on the yammer metrics package see:
-
-http://metrics.codahale.com/index.html
+See the source code documentation on Github for more details.
 '''
 
     // URL to the plugin's documentation
