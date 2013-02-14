@@ -34,7 +34,7 @@ Timed the Java Way
 class SomeService{
   private final Timer serveTimer = Metrics.newTimer(SomeService.class, "serveTimer", TimeUnit.MILLISECONDS, TimeUnit.SECONDS);
   public String serve(def foo, def bar) {
-    final TimerContext context = responses.time();
+    final TimerContext context = serveTimer.time();
     try {
         return "OK";
     } finally {
