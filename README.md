@@ -83,7 +83,7 @@ Metered the Grails Way
 ```
 class SomeService{
 
-  @org.grails.plugins.yammermetrics.groovy.Meter
+  @org.grails.plugins.yammermetrics.groovy.Metered
   public String serve(def foo, def bar) {
     return "OK"
   }
