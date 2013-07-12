@@ -1,3 +1,5 @@
+import org.apache.commons.lang.StringUtils
+
 /*
  * Copyright 2012 Jeff Ellis
  */
@@ -48,15 +50,19 @@ See the source code documentation on Github for more details.
 
             count = xml.'servlet-mapping'.size()
             if(count > 0) {
+                def servletUrlPattern = application.config.metrics.servletUrlPattern as String
+                if (!servletUrlPattern) {
+                    servletUrlPattern = '/metrics/*'
+                }
                 def servletMappingElement = xml.'servlet-mapping'[count - 1]
                 servletMappingElement + {
 
                     'servlet-mapping' {
                         'servlet-name'("YammerMetrics")
-                        'url-pattern'("/metrics/*")
+                        'url-pattern'(servletUrlPattern)
                     }
                 }
-                println "YammerMetrics Admin servlet-mapping (for /metrics/*) injected into web.xml\n***"
+                println "YammerMetrics Admin servlet-mapping (for $servletUrlPattern) injected into web.xml\n***"
             }
         } else{
             println "Skipping YammerMetrics Admin servlet mapping\n***"

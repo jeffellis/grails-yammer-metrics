@@ -1,5 +1,6 @@
 .classpath
 .project
+.idea
 *.iml
 *.prefs
 *.log

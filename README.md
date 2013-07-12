@@ -7,12 +7,15 @@ Provides the following features:
 
 This plugin wires the AdminServlet to the /metrics endpoint in the including application. To disable this functionality,
 add the following to the application's Config:
-'''
+```
     metrics.servletEnabled = false
-'''
-For detailed documentation on the yammer metrics package see:
+```
+To customize the url pattern of the AdminServlet to something different than /metrics add the following Config param:
+```
+    metrics.servletUrlPattern = '/my/custom/metrics/url/*'
+```
 
-http://metrics.codahale.com/index.html
+For detailed documentation on the yammer metrics package see: http://metrics.codahale.com/index.html
 
 Annotations
 -------
