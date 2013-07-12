@@ -97,7 +97,6 @@ Note: Annotations can be safely combined.
 
 TODO
 -------
- * Support more of the underlying metric parameters via annotations
  * Annotations to support other yammer metrics
  * Automatic controller or service metrics
  * Some gui component (different plugin?)

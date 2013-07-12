@@ -1,6 +1,11 @@
 Plugin version numbers are constructed as a combination of the core metrics version plus the release of the plugin.
 For example, 2.1.2-4 is the fourth release of the plugin based on version 2.1.2 of the metrics jars.
 
+2.1.2-6: Jul 12 2013
+====================
+* Fixed [Issue #10] - malformed metric names when deployed as a WAR (pull request from JoeDeVries)
+* AdminServlet url-pattern should be configurable (pull request from pvblivs)
+
 2.1.2-4: Jan 21 2013
 ====================
 
