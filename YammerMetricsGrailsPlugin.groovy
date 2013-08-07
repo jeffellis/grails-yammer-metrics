@@ -50,8 +50,8 @@ See the source code documentation on Github for more details.
 
             count = xml.'servlet-mapping'.size()
             if(count > 0) {
-                def servletUrlPattern = application.config.metrics.servletUrlPattern as String
-                if (!servletUrlPattern) {
+                def servletUrlPattern = application.config.metrics.servletUrlPattern
+                if (servletUrlPattern.isEmpty()) {
                     servletUrlPattern = '/metrics/*'
                 }
                 def servletMappingElement = xml.'servlet-mapping'[count - 1]
