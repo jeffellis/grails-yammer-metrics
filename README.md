@@ -21,7 +21,7 @@ Annotations
 -------
 @Timed
 This annotation can be added to any method you wish to be timed.  @Timed uses sensible defaults to create an instance of
-com.yammer.metrics.core.Timer and the associated code to update it from within your method body.
+com.codahale.metrics.core.Timer and the associated code to update it from within your method body.
 
 Before
 ```
@@ -59,7 +59,7 @@ class SomeService{
 
 @Metered
 This annotation can be added to any method you wish to be metered.  @Metered uses sensible defaults to create an instance of
-com.yammer.metrics.core.Meter and the associated code to update it from within your method body.
+com.codahale.metrics.core.Meter and the associated code to update it from within your method body.
 
 
 Before

@@ -1,25 +1,25 @@
 package org.grails.plugins.yammermetrics.groovy
 
-import com.yammer.metrics.Metrics
+import com.codahale.metrics.MetricRegistry
 import org.codehaus.groovy.reflection.ReflectionUtils
 
-import java.util.concurrent.TimeUnit
+class GroovierMetrics {
+    static MetricRegistry DEFAULT_METRICS_REGISTRY = new MetricRegistry()
 
-class GroovierMetrics extends Metrics {
 	// ignore org.springsource.loaded.ri.ReflectiveInterceptor when not running as a war, and ignore this class for convenience
 	static final List<String> extraIgnoredPackages = ["org.springsource.loaded.ri", "org.grails.plugins.yammermetrics.groovy"]
 
     private GroovierMetrics() { super() }
 
-    static com.yammer.metrics.core.Meter newMeter(String meterName){
-        return newMeter(ReflectionUtils.getCallingClass(0, extraIgnoredPackages), meterName, meterName, TimeUnit.SECONDS)
+    static com.codahale.metrics.Meter newMeter(String meterName){
+        return DEFAULT_METRICS_REGISTRY.meter(MetricRegistry.name(ReflectionUtils.getCallingClass(0, extraIgnoredPackages), meterName))
     }
 
-    static com.yammer.metrics.core.Timer newTimer(String timerName){
-        return newTimer(ReflectionUtils.getCallingClass(0, extraIgnoredPackages), timerName )
+    static com.codahale.metrics.Timer newTimer(String timerName){
+        return DEFAULT_METRICS_REGISTRY.timer(MetricRegistry.name(ReflectionUtils.getCallingClass(0, extraIgnoredPackages), timerName))
     }
 
-    static com.yammer.metrics.core.Timer newTimer(String className, String timerName){
-        return newTimer(Class.forName(className), timerName)
+    static com.codahale.metrics.Timer newTimer(String className, String timerName){
+        return DEFAULT_METRICS_REGISTRY.timer(MetricRegistry.name(className, timerName))
     }
 }

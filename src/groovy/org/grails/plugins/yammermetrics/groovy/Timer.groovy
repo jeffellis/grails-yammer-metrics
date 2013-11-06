@@ -3,14 +3,11 @@
  */
 package org.grails.plugins.yammermetrics.groovy
 
-import com.yammer.metrics.Metrics
-import com.yammer.metrics.core.TimerContext
-import java.util.concurrent.TimeUnit
 import org.apache.commons.logging.LogFactory
 
 class Timer {
 
-	@Delegate private com.yammer.metrics.core.Timer timerMetric
+	@Delegate private com.codahale.metrics.Timer timerMetric
 	String owner
 	String name
 
@@ -22,13 +19,12 @@ class Timer {
 		this.name = name
 
 		ownerLog = LogFactory.getLog( owner )
-		timerMetric = Metrics.newTimer( owner, name,
-			TimeUnit.MILLISECONDS, TimeUnit.SECONDS )
+		timerMetric = GroovierMetrics.newTimer( owner, name)
 	}
 
 	def time( Closure closure ) {
 		def oldMax = timerMetric.max()
-		TimerContext tc = timerMetric.time()
+        com.codahale.metrics.Timer.Context tc = timerMetric.time()
 		try {
 			closure.call()
 		} finally {

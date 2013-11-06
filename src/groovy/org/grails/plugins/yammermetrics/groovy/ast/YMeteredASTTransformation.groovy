@@ -54,7 +54,7 @@ public class YMeteredASTTransformation implements ASTTransformation {
             FieldNode timerField = new FieldNode(
                     meterName,
                     Modifier.PRIVATE,
-                    new ClassNode(com.yammer.metrics.core.Meter.class),
+                    new ClassNode(com.codahale.metrics.Meter.class),
                     new ClassNode(classNode.getClass()),
                     new StaticMethodCallExpression(
                             new ClassNode(GroovierMetrics.class),

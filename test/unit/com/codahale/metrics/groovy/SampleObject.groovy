@@ -1,4 +1,4 @@
-package com.yamme.metrics.groovy
+package com.codahale.metrics.groovy
 
 import org.grails.plugins.yammermetrics.groovy.GroovierMetrics
 import org.grails.plugins.yammermetrics.groovy.Metered

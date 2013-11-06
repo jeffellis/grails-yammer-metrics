@@ -89,7 +89,7 @@ public class YTimedASTTransformation implements ASTTransformation {
             FieldNode timerField = new FieldNode(
                     timerName,
                     Modifier.PRIVATE,
-                    new ClassNode(com.yammer.metrics.core.Timer.class),
+                    new ClassNode(com.codahale.metrics.Timer.class),
                     new ClassNode(classNode.getClass()),
                     new StaticMethodCallExpression(
                             new ClassNode(GroovierMetrics.class),

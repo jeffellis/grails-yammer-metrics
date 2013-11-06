@@ -12,8 +12,8 @@ grails.project.source.level = 1.6
 //]
 
 // Testing the plugin
-grails.plugin.location.'yammer-metrics' =  "/home/jeff/projects/grails-yammer-metrics"
-yammermetrics.version = System.getProperty( "yammermetrics.version", "2.2.0" )
+grails.plugin.location.'yammer-metrics' =  "../."
+yammermetrics.version = System.getProperty( "yammermetrics.version", "3.0.1" )
 
 grails.project.dependency.resolution = {
 
@@ -49,8 +49,8 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.20'
 
         // Have to duplicate this here to use the plugin in-line.
-        runtime "com.yammer.metrics:metrics-core:${yammermetrics.version}"
-        runtime "com.yammer.metrics:metrics-servlet:${yammermetrics.version}"
+        runtime "com.codahale.metrics:metrics-core:${yammermetrics.version}"
+        runtime "com.codahale.metrics:metrics-servlets:${yammermetrics.version}"
 
     }
 

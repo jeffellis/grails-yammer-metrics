@@ -6,7 +6,7 @@ import org.apache.commons.lang.StringUtils
 class YammerMetricsGrailsPlugin {
 
 	// the plugin version
-    def version = "2.2.0-1"
+    def version = "3.0.1-1"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.0.3 > *"
     // the other plugins this plugin depends on
@@ -34,7 +34,20 @@ See the source code documentation on Github for more details.
     def doWithWebDescriptor = { xml ->
 
         if(application.config.metrics.servletEnabled!=false){
-            def count = xml.'servlet'.size()
+            def count = xml.'listener'.size()
+            def listenerElement = xml.'listener'[count - 1]
+            if(count > 0) {
+                listenerElement + {
+                    'listener' {
+                        'listener-class'('org.grails.plugins.yammermetrics.groovy.HealthCheckServletContextListener')
+                    }
+                    'listener' {
+                        'listener-class'('org.grails.plugins.yammermetrics.groovy.MetricsServletContextListener')
+                    }
+                }
+            }
+
+            count = xml.'servlet'.size()
             if(count > 0) {
 
                 def servletElement = xml.'servlet'[count - 1]

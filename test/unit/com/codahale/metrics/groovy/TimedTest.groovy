@@ -1,6 +1,8 @@
-package com.yamme.metrics.groovy
+package com.codahale.metrics.groovy
 
-import com.yammer.metrics.core.Timer
+import com.codahale.metrics.MetricFilter
+import com.codahale.metrics.Timer
+import org.grails.plugins.yammermetrics.groovy.GroovierMetrics
 
 /**
  * User: GavinHogan@gmail.com
@@ -11,8 +13,11 @@ class TimedTest extends GroovyTestCase {
     SampleObject sample
 
     void setUp(){
-
         sample = new SampleObject()
+    }
+
+    void tearDown() {
+        GroovierMetrics.DEFAULT_METRICS_REGISTRY.removeMatching(MetricFilter.ALL)
     }
 
     void testAddingTimerField(){
@@ -37,12 +42,12 @@ class TimedTest extends GroovyTestCase {
 
     void testUsingNamedTimer(){
         def namedTimer = sample.namedTimerInst
-        namedTimer.clear()
+//        namedTimer.clear()
         def callCount = 10
         callCount.times{
             sample.timedWithNamed()
         }
-        assertEquals("We should see ${callCount} calls on our timer", callCount, namedTimer.count() )
+        assertEquals("We should see ${callCount} calls on our timer", callCount, namedTimer.count )
     }
 
     void testSetupExistingNamedTimer(){
@@ -52,12 +57,12 @@ class TimedTest extends GroovyTestCase {
 
     void testUsingExistingNamedTimer(){
         def namedExistingTimer = sample.existingNamedTimerInst
-        namedExistingTimer.clear()
+//        namedExistingTimer.clear()
         def callCount = 10
         callCount.times{
             sample.timedWithExistingNamed()
         }
-        assertEquals("We should see ${callCount} calls on our timer", callCount, namedExistingTimer.count() )
+        assertEquals("We should see ${callCount} calls on our timer", callCount, namedExistingTimer.count )
 
     }
 
@@ -68,21 +73,21 @@ class TimedTest extends GroovyTestCase {
             sample.timed()
         }
         def timer = sample.timedTimer
-        assertEquals("We should see ${callCount} calls on our timer", callCount, timer.count() )
+        assertEquals("We should see ${callCount} calls on our timer", callCount, timer.count )
 
     }
 
 
     //Not going crazy testing the yammer code, just want to ensure that our AST is functioning.
     void testCallingMultiMetricMethod(){
-        sample.multiMetricTimer.clear()
-
+//        sample.multiMetricTimer.clear()
+        def timer = sample.multiMetricTimer
+assertEquals( 0, timer.count )
         def callCount = 10
         callCount.times {
             sample.multiMetric()
         }
-        def timer = sample.multiMetricTimer
-        assertEquals("We should see ${callCount} calls on our timer", callCount, timer.count() )
+        assertEquals("We should see ${callCount} calls on our timer", callCount, timer.count )
     }
 
 }
