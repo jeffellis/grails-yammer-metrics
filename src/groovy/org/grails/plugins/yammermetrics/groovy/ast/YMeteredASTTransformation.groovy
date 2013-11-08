@@ -1,13 +1,12 @@
 package org.grails.plugins.yammermetrics.groovy.ast
 
-import org.grails.plugins.yammermetrics.groovy.GroovierMetrics
-
 import org.apache.log4j.Logger
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.control.CompilePhase
 import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.transform.ASTTransformation
 import org.codehaus.groovy.transform.GroovyASTTransformation
+import org.grails.plugins.yammermetrics.groovy.Metrics
 
 import java.lang.reflect.Modifier
 
@@ -57,7 +56,7 @@ public class YMeteredASTTransformation implements ASTTransformation {
                     new ClassNode(com.codahale.metrics.Meter.class),
                     new ClassNode(classNode.getClass()),
                     new StaticMethodCallExpression(
-                            new ClassNode(GroovierMetrics.class),
+                            new ClassNode(Metrics.class),
                             'newMeter',
                             new ArgumentListExpression([
                                     new ConstantExpression(meterName),

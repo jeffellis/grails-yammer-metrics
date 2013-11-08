@@ -1,4 +1,12 @@
+import com.codahale.metrics.MetricRegistry
+import com.codahale.metrics.health.HealthCheckRegistry
+import com.codahale.metrics.servlets.HealthCheckServlet
+import com.codahale.metrics.servlets.MetricsServlet
 import org.apache.commons.lang.StringUtils
+import org.grails.plugins.yammermetrics.groovy.HealthCheckServletContextListener
+import org.grails.plugins.yammermetrics.groovy.MetricsServletContextListener
+
+import javax.servlet.ServletContextEvent
 
 /*
  * Copyright 2012 Jeff Ellis
@@ -34,20 +42,7 @@ See the source code documentation on Github for more details.
     def doWithWebDescriptor = { xml ->
 
         if(application.config.metrics.servletEnabled!=false){
-            def count = xml.'listener'.size()
-            def listenerElement = xml.'listener'[count - 1]
-            if(count > 0) {
-                listenerElement + {
-                    'listener' {
-                        'listener-class'('org.grails.plugins.yammermetrics.groovy.HealthCheckServletContextListener')
-                    }
-                    'listener' {
-                        'listener-class'('org.grails.plugins.yammermetrics.groovy.MetricsServletContextListener')
-                    }
-                }
-            }
-
-            count = xml.'servlet'.size()
+            def count = xml.'servlet'.size()
             if(count > 0) {
 
                 def servletElement = xml.'servlet'[count - 1]
@@ -91,7 +86,18 @@ See the source code documentation on Github for more details.
     }
 
     def doWithApplicationContext = { applicationContext ->
-        // TODO Implement post initialization spring config (optional)
+
+        // Create registries for HealthChecks and Metrics here, and stuff them into the servlet context.  Don't
+        // wait for the regular listener lifecycle because that happens after application BootStrap.groovy.
+
+        ServletContextEvent event = new ServletContextEvent(applicationContext.servletContext)
+        HealthCheckServletContextListener healthCheckServletContextListener = new HealthCheckServletContextListener()
+        healthCheckServletContextListener.contextInitialized(event)
+
+        MetricsServletContextListener metricsServletContextListener = new MetricsServletContextListener()
+        metricsServletContextListener.contextInitialized(event)
+
+        println "Registries in servletContext"
     }
 
     def onChange = { event ->

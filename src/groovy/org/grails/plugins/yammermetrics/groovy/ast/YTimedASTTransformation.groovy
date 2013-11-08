@@ -1,6 +1,5 @@
 package org.grails.plugins.yammermetrics.groovy.ast
 
-import org.grails.plugins.yammermetrics.groovy.GroovierMetrics
 import org.apache.log4j.Logger
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
@@ -11,6 +10,7 @@ import org.codehaus.groovy.syntax.Token
 import org.codehaus.groovy.syntax.Types
 import org.codehaus.groovy.transform.ASTTransformation
 import org.codehaus.groovy.transform.GroovyASTTransformation
+import org.grails.plugins.yammermetrics.groovy.Metrics
 
 import java.lang.reflect.Modifier
 
@@ -92,7 +92,7 @@ public class YTimedASTTransformation implements ASTTransformation {
                     new ClassNode(com.codahale.metrics.Timer.class),
                     new ClassNode(classNode.getClass()),
                     new StaticMethodCallExpression(
-                            new ClassNode(GroovierMetrics.class),
+                            new ClassNode(Metrics.class),
                             'newTimer',
                             new ArgumentListExpression([
                                     new ConstantExpression(timerName),

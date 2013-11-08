@@ -5,8 +5,10 @@ import com.codahale.metrics.servlets.MetricsServlet
 
 class MetricsServletContextListener extends MetricsServlet.ContextListener {
 
+    public final MetricRegistry metricRegistry = new MetricRegistry()
+
     @Override
     protected MetricRegistry getMetricRegistry() {
-        return GroovierMetrics.DEFAULT_METRICS_REGISTRY
+        return metricRegistry
     }
 }

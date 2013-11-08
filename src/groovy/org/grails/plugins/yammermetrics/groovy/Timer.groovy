@@ -19,7 +19,7 @@ class Timer {
 		this.name = name
 
 		ownerLog = LogFactory.getLog( owner )
-		timerMetric = GroovierMetrics.newTimer( owner, name)
+		timerMetric = Metrics.newTimer( owner, name)
 	}
 
 	def time( Closure closure ) {

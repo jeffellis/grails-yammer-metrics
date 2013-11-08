@@ -1,12 +1,10 @@
-import com.codahale.metrics.health.HealthCheckRegistry
 import metricstest.AlwaysHealthyCheck
-import org.grails.plugins.yammermetrics.groovy.HealthCheckServletContextListener
+import org.grails.plugins.yammermetrics.groovy.HealthChecks
 
 class BootStrap {
 
     def init = { servletContext ->
-        HealthCheckRegistry healthCheckRegistry = HealthCheckServletContextListener.HEALTH_CHECK_REGISTRY
-        healthCheckRegistry.register("AlwaysHealthyCheck", new AlwaysHealthyCheck())
+        HealthChecks.register("AlwaysHealthyCheck", new AlwaysHealthyCheck())
     }
 
     def destroy = {

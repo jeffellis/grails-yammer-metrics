@@ -2,7 +2,8 @@ package com.codahale.metrics.groovy
 
 import com.codahale.metrics.Meter
 import com.codahale.metrics.MetricFilter
-import org.grails.plugins.yammermetrics.groovy.GroovierMetrics
+import com.codahale.metrics.MetricRegistry
+import org.grails.plugins.yammermetrics.groovy.Metrics
 
 /**
  * User: GavinHogan@gmail.com
@@ -18,7 +19,7 @@ class MeterTest extends GroovyTestCase {
     }
 
     void tearDown() {
-        GroovierMetrics.DEFAULT_METRICS_REGISTRY.removeMatching(MetricFilter.ALL)
+        Metrics.registry.removeMatching(MetricFilter.ALL)
     }
 
     void testAddingMeterField(){
