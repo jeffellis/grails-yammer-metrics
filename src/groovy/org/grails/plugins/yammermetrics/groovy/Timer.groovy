@@ -7,44 +7,46 @@ import org.apache.commons.logging.LogFactory
 
 class Timer {
 
-	@Delegate private com.codahale.metrics.Timer timerMetric
-	String owner
-	String name
+    @Delegate
+    private com.codahale.metrics.Timer timerMetric
+    String owner
+    String name
 
-	private static final log = LogFactory.getLog( Timer )
-	private ownerLog
+    private static final log = LogFactory.getLog(Timer)
+    private ownerLog
 
-	Timer( Class<?> owner, String name ) {
-		this.owner = owner.name
-		this.name = name
+    Timer(Class<?> owner, String name) {
+        this.owner = owner.name
+        this.name = name
 
-		ownerLog = LogFactory.getLog( owner )
-		timerMetric = Metrics.newTimer( owner, name)
-	}
+        ownerLog = LogFactory.getLog(owner)
+        timerMetric = Metrics.newTimer(owner, name)
+    }
 
-	def time( Closure closure ) {
-		def oldMax = timerMetric.max()
+    def time(Closure closure, String maxMessage = null) {
+        def oldMax = timerMetric.getSnapshot().getMax()
         com.codahale.metrics.Timer.Context tc = timerMetric.time()
-		try {
-			closure.call()
-		} finally {
-			tc.stop()
-		}
-		if( timerMetric.max() > oldMax ) {
-			onNewMax.call()
-		}
-	}
+        try {
+            closure.call()
+        } finally {
+            tc.stop()
+        }
+        def newMax = timerMetric.getSnapshot().getMax()
+        if (newMax > oldMax) {
+            onNewMax.call()
+            if (maxMessage) {
+                ownerLog.info("${name} -- New maximum of ${newMax} ns set")
+                ownerLog.info(maxMessage)
+            }
+        }
+    }
 
-	def time( String maxMessage, Closure closure ) {
-		def oldMax = timerMetric.max()
-		this.time( closure )
-		if( timerMetric.max() > oldMax ) {
-			ownerLog.info( "${name} -- New maximum of ${max()} ${durationUnit()} set")
-			ownerLog.info( maxMessage )
-		}
-	}
+    @Deprecated
+    def time(String maxMessage, Closure closure) {
+        this.time(closure, maxMessage)
+    }
 
-	def onNewMax = {
-	}
+    def onNewMax = {
+    }
 
 }

@@ -2,8 +2,10 @@ package org.grails.plugins.yammermetrics.groovy
 
 import com.codahale.metrics.Counter
 import com.codahale.metrics.Histogram
+import com.codahale.metrics.JmxReporter
 import com.codahale.metrics.Meter
 import com.codahale.metrics.MetricRegistry
+import com.codahale.metrics.Reservoir
 import com.codahale.metrics.servlets.MetricsServlet
 import com.codahale.metrics.Gauge
 import grails.util.Holders
@@ -18,8 +20,13 @@ class Metrics {
 
     private Metrics() { super() }
 
-    static Gauge newGauge(String gaugeName, Gauge metric){
-        return registry.register(MetricRegistry.name(ReflectionUtils.getCallingClass(0, extraIgnoredPackages), gaugeName), metric)
+    static Gauge newGauge(String gaugeName, Gauge gauge){
+        String metricName = MetricRegistry.name(ReflectionUtils.getCallingClass(0, extraIgnoredPackages), gaugeName)
+        def metric = registry.getGauges().get(metricName)
+        if(!metric) {
+            metric = registry.register(metricName, gauge)
+        }
+        return metric
     }
 
     static Counter newCounter(String counterName){
@@ -28,6 +35,16 @@ class Metrics {
 
     static Histogram newHistogram(String name){
         return registry.histogram(MetricRegistry.name(ReflectionUtils.getCallingClass(0, extraIgnoredPackages), name))
+    }
+
+    static Histogram newHistogram(String name, Reservoir reservoir){
+        String metricName = MetricRegistry.name(ReflectionUtils.getCallingClass(0, extraIgnoredPackages), name)
+        def metric = registry.getHistograms().get(metricName)
+        if(!metric) {
+            Histogram histogram = new Histogram(reservoir)
+            metric = registry.register(metricName, histogram)
+        }
+        return metric
     }
 
     static Meter newMeter(String meterName){
@@ -48,5 +65,11 @@ class Metrics {
             metricRegistry = builtInRegistry
         }
         return metricRegistry
+    }
+
+    static JmxReporter startJmxReporter() {
+        final JmxReporter reporter = JmxReporter.forRegistry(Metrics.getRegistry()).build();
+        reporter.start();
+        return reporter
     }
 }
