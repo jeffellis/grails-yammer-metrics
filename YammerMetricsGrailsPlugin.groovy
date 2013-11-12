@@ -1,15 +1,14 @@
-import com.codahale.metrics.MetricRegistry
-import com.codahale.metrics.health.HealthCheckRegistry
-import com.codahale.metrics.servlets.HealthCheckServlet
 import com.codahale.metrics.servlets.MetricsServlet
-import org.apache.commons.lang.StringUtils
-import org.grails.plugins.yammermetrics.groovy.HealthCheckServletContextListener
-import org.grails.plugins.yammermetrics.groovy.MetricsServletContextListener
+import grails.util.Holders
+import org.grails.plugins.yammermetrics.groovy.HealthCheckServletContextInitializer
+import org.grails.plugins.yammermetrics.groovy.HealthCheckServletContextInitializer
+import org.grails.plugins.yammermetrics.groovy.MetricsServletContextInitializer
 
 import javax.servlet.ServletContextEvent
+import java.util.concurrent.TimeUnit
 
 /*
- * Copyright 2012 Jeff Ellis
+ * Copyright 2013 Jeff Ellis
  */
 class YammerMetricsGrailsPlugin {
 
@@ -42,7 +41,40 @@ See the source code documentation on Github for more details.
     def doWithWebDescriptor = { xml ->
 
         if(application.config.metrics.servletEnabled!=false){
-            def count = xml.'servlet'.size()
+            def count
+
+            // It doesn't seem like context-params are where Coda meant for these to be defined based on the
+            // MetricsServlet.ContextListener, but this is where MetricsServlet actually reads them from.  Need to
+            // file an issue or at least verify this is what he meant.
+
+            count = xml.'context-param'.size()
+            if(count > 0) {
+
+                def contextParamElement = xml.'context-param'[count - 1]
+
+                def unit = Holders.getConfig().yammermetrics.servlet.rateUnit
+                if(unit instanceof String) {
+                    contextParamElement + {
+                        'context-param' {
+                            'param-name'(MetricsServlet.RATE_UNIT)
+                            'param-value'(unit)
+                        }
+                    }
+                }
+
+                unit = Holders.getConfig().yammermetrics.servlet.durationUnit
+                if(unit instanceof String) {
+                    contextParamElement + {
+                        'context-param' {
+                            'param-name'(MetricsServlet.DURATION_UNIT)
+                            'param-value'(unit)
+                        }
+                    }
+                }
+
+            }
+
+            count = xml.'servlet'.size()
             if(count > 0) {
 
                 def servletElement = xml.'servlet'[count - 1]
@@ -50,7 +82,7 @@ See the source code documentation on Github for more details.
                 servletElement + {
                     'servlet' {
                         'servlet-name'("YammerMetrics")
-                        'servlet-class'("org.grails.plugins.yammermetrics.reporting.GrailsAdminServlet")
+                        'servlet-class'("com.codahale.metrics.servlets.AdminServlet")
                     }
                 }
                 println "***\nYammerMetrics servlet injected into web.xml"
@@ -88,16 +120,16 @@ See the source code documentation on Github for more details.
     def doWithApplicationContext = { applicationContext ->
 
         // Create registries for HealthChecks and Metrics here, and stuff them into the servlet context.  Don't
-        // wait for the regular listener lifecycle because that happens after application BootStrap.groovy.
+        // wait for the regular listener lifecycle because that happens after application BootStrap.groovy. Since
+        // we're doing this here, there is no need to wire them as real listeners.
 
         ServletContextEvent event = new ServletContextEvent(applicationContext.servletContext)
-        HealthCheckServletContextListener healthCheckServletContextListener = new HealthCheckServletContextListener()
-        healthCheckServletContextListener.contextInitialized(event)
+        HealthCheckServletContextInitializer healthCheckServletContextInitializer = new HealthCheckServletContextInitializer()
+        healthCheckServletContextInitializer.contextInitialized(event)
 
-        MetricsServletContextListener metricsServletContextListener = new MetricsServletContextListener()
-        metricsServletContextListener.contextInitialized(event)
+        MetricsServletContextInitializer metricsServletContextInitializer = new MetricsServletContextInitializer()
+        metricsServletContextInitializer.contextInitialized(event)
 
-        println "Registries in servletContext"
     }
 
     def onChange = { event ->

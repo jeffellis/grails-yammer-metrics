@@ -1,15 +1,7 @@
 package com.codahale.metrics.groovy
 
 import com.codahale.metrics.Meter
-import com.codahale.metrics.MetricFilter
-import com.codahale.metrics.MetricRegistry
 import org.grails.plugins.yammermetrics.groovy.Metrics
-
-/**
- * User: GavinHogan@gmail.com
- * Date: 5/23/12
- * Time: 4:37 PM
- */
 
 class MeterTest extends GroovyTestCase {
     SampleObject sample
@@ -19,7 +11,7 @@ class MeterTest extends GroovyTestCase {
     }
 
     void tearDown() {
-        Metrics.registry.removeMatching(MetricFilter.ALL)
+        Metrics.removeAll()
     }
 
     void testAddingMeterField(){

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Jeff Ellis
+ * Copyright 2013 Jeff Ellis
  */
 package org.grails.plugins.yammermetrics.groovy
 
@@ -12,7 +12,6 @@ class Timer {
     String owner
     String name
 
-    private static final log = LogFactory.getLog(Timer)
     private ownerLog
 
     Timer(Class<?> owner, String name) {

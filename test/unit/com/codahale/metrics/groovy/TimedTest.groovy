@@ -1,15 +1,8 @@
 package com.codahale.metrics.groovy
 
-import com.codahale.metrics.MetricFilter
-import com.codahale.metrics.MetricRegistry
 import com.codahale.metrics.Timer
 import org.grails.plugins.yammermetrics.groovy.Metrics
 
-/**
- * User: GavinHogan@gmail.com
- * Date: 5/23/12
- * Time: 2:37 PM
- */
 class TimedTest extends GroovyTestCase {
     SampleObject sample
 
@@ -18,7 +11,7 @@ class TimedTest extends GroovyTestCase {
     }
 
     void tearDown() {
-        Metrics.registry.removeMatching(MetricFilter.ALL)
+        Metrics.removeAll()
     }
 
     void testAddingTimerField(){

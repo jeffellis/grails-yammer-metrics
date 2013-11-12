@@ -106,11 +106,11 @@ License
 -------
 
 This plugin is
- Copyright (c) 2012 Jeff Ellis
+ Copyright (c) 2013 Jeff Ellis
 
  Published under Apache Software License 2.0, see LICENSE
 
 The metrics jars are:
- Copyright (c) 2010-2012 Coda Hale, Yammer.com
+ Copyright (c) 2010-2013 Coda Hale, Yammer.com
 
  Published under Apache Software License 2.0

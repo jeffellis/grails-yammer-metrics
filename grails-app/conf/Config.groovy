@@ -1,3 +1,5 @@
+import java.util.concurrent.TimeUnit
+
 // configuration for plugin testing - will not be included in the plugin zip
  
 log4j = {

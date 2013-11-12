@@ -25,10 +25,10 @@ public class YMeteredASTTransformation implements ASTTransformation {
         AnnotationNode annotationNode = nodes[0]
         MethodNode methodNode = nodes[1]
         String meterName = ensureMeterConfigured(annotationNode, methodNode.declaringClass, methodNode)
-        makeMeteredMethod(meterName, methodNode.declaringClass, methodNode)
+        makeMeteredMethod(meterName, methodNode)
     }
 
-    private void makeMeteredMethod(String meterName, ClassNode classNode, MethodNode methodNode){
+    private void makeMeteredMethod(String meterName, MethodNode methodNode){
         try {
             def meterCall = new ExpressionStatement (new MethodCallExpression(new VariableExpression(meterName), "mark", new ArgumentListExpression() ) )
             //Add meter call

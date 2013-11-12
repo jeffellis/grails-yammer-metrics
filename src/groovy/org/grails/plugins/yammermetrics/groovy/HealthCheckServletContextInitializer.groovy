@@ -3,7 +3,7 @@ package org.grails.plugins.yammermetrics.groovy
 import com.codahale.metrics.health.HealthCheckRegistry
 import com.codahale.metrics.servlets.HealthCheckServlet
 
-class HealthCheckServletContextListener extends HealthCheckServlet.ContextListener {
+class HealthCheckServletContextInitializer extends HealthCheckServlet.ContextListener {
 
     public final HealthCheckRegistry healthCheckRegistry = new HealthCheckRegistry()
 
