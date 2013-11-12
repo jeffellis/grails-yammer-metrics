@@ -1,11 +1,9 @@
 import com.codahale.metrics.servlets.MetricsServlet
 import grails.util.Holders
-import org.grails.plugins.yammermetrics.groovy.HealthCheckServletContextInitializer
-import org.grails.plugins.yammermetrics.groovy.HealthCheckServletContextInitializer
-import org.grails.plugins.yammermetrics.groovy.MetricsServletContextInitializer
+import org.grails.plugins.metrics.groovy.HealthCheckServletContextInitializer
+import org.grails.plugins.metrics.groovy.MetricsServletContextInitializer
 
 import javax.servlet.ServletContextEvent
-import java.util.concurrent.TimeUnit
 
 /*
  * Copyright 2013 Jeff Ellis
@@ -52,7 +50,7 @@ See the source code documentation on Github for more details.
 
                 def contextParamElement = xml.'context-param'[count - 1]
 
-                def unit = Holders.getConfig().yammermetrics.servlet.rateUnit
+                def unit = Holders.getConfig().metrics.servlet.rateUnit
                 if(unit instanceof String) {
                     contextParamElement + {
                         'context-param' {
@@ -62,7 +60,7 @@ See the source code documentation on Github for more details.
                     }
                 }
 
-                unit = Holders.getConfig().yammermetrics.servlet.durationUnit
+                unit = Holders.getConfig().metrics.servlet.durationUnit
                 if(unit instanceof String) {
                     contextParamElement + {
                         'context-param' {
@@ -81,11 +79,11 @@ See the source code documentation on Github for more details.
 
                 servletElement + {
                     'servlet' {
-                        'servlet-name'("YammerMetrics")
+                        'servlet-name'("Metrics")
                         'servlet-class'("com.codahale.metrics.servlets.AdminServlet")
                     }
                 }
-                println "***\nYammerMetrics servlet injected into web.xml"
+                println "***\nMetrics servlet injected into web.xml"
             }
 
             count = xml.'servlet-mapping'.size()
@@ -98,14 +96,14 @@ See the source code documentation on Github for more details.
                 servletMappingElement + {
 
                     'servlet-mapping' {
-                        'servlet-name'("YammerMetrics")
+                        'servlet-name'("Metrics")
                         'url-pattern'(servletUrlPattern)
                     }
                 }
-                println "YammerMetrics Admin servlet-mapping (for $servletUrlPattern) injected into web.xml\n***"
+                println "Metrics Admin servlet-mapping (for $servletUrlPattern) injected into web.xml\n***"
             }
         } else{
-            println "Skipping YammerMetrics Admin servlet mapping\n***"
+            println "Skipping Metrics Admin servlet mapping\n***"
         }
     }
 

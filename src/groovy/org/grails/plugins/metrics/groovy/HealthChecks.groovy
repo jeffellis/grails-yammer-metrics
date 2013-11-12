@@ -1,4 +1,4 @@
-package org.grails.plugins.yammermetrics.groovy
+package org.grails.plugins.metrics.groovy
 
 import com.codahale.metrics.health.HealthCheck
 import com.codahale.metrics.health.HealthCheckRegistry

@@ -1,4 +1,4 @@
-package org.grails.plugins.yammermetrics.groovy
+package org.grails.plugins.metrics.groovy
 
 import com.codahale.metrics.MetricRegistry
 import com.codahale.metrics.servlets.MetricsServlet
@@ -26,7 +26,7 @@ class MetricsServletContextInitializer extends MetricsServlet.ContextListener {
     }
 
     private TimeUnit getUnitFromConfig(String propertyName) {
-        def unit = Holders.config.yammermetrics.servlet[propertyName]
+        def unit = Holders.config.metrics.servlet[propertyName]
         if (unit instanceof String) {
             return TimeUnit.valueOf(unit.toUpperCase(Locale.US))
         }

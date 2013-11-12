@@ -7,7 +7,7 @@ grails.project.source.level = 1.6
 
 // Inline the metrics plugin for easy testing
 grails.plugin.location.'yammer-metrics' =  "../."
-yammermetrics.version = System.getProperty( "yammermetrics.version", "3.0.1" )
+yammermetrics.version = System.getProperty( "metrics.version", "3.0.1" )
 
 grails.project.dependency.resolution = {
 

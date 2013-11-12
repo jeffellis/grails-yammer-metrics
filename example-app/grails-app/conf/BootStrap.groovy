@@ -1,5 +1,5 @@
 import metricstest.AlwaysHealthyCheck
-import org.grails.plugins.yammermetrics.groovy.HealthChecks
+import org.grails.plugins.metrics.groovy.HealthChecks
 
 class BootStrap {
 

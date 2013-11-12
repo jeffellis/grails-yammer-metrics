@@ -1,4 +1,4 @@
-package org.grails.plugins.yammermetrics.groovy.ast
+package org.grails.plugins.metrics.groovy.ast
 
 import org.apache.log4j.Logger
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
@@ -6,7 +6,7 @@ import org.codehaus.groovy.control.CompilePhase
 import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.transform.ASTTransformation
 import org.codehaus.groovy.transform.GroovyASTTransformation
-import org.grails.plugins.yammermetrics.groovy.Metrics
+import org.grails.plugins.metrics.groovy.Metrics
 
 import java.lang.reflect.Modifier
 

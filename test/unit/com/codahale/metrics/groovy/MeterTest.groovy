@@ -1,7 +1,7 @@
 package com.codahale.metrics.groovy
 
 import com.codahale.metrics.Meter
-import org.grails.plugins.yammermetrics.groovy.Metrics
+import org.grails.plugins.metrics.groovy.Metrics
 
 class MeterTest extends GroovyTestCase {
     SampleObject sample

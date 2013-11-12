@@ -1,4 +1,4 @@
-package org.grails.plugins.yammermetrics.groovy
+package org.grails.plugins.metrics.groovy
 
 import org.codehaus.groovy.transform.GroovyASTTransformationClass
 
@@ -13,7 +13,7 @@ import java.lang.annotation.Target
  */
 @Retention(RetentionPolicy.SOURCE)
 @Target([ElementType.METHOD])
-@GroovyASTTransformationClass(["org.grails.plugins.yammermetrics.groovy.ast.YMeteredASTTransformation"])
+@GroovyASTTransformationClass(["org.grails.plugins.metrics.groovy.ast.YMeteredASTTransformation"])
 public @interface Metered {
     String name() default "";
 

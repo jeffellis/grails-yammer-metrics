@@ -2,7 +2,7 @@ package com.codahale.metrics.groovy
 
 import com.codahale.metrics.Histogram
 import com.codahale.metrics.SlidingTimeWindowReservoir
-import org.grails.plugins.yammermetrics.groovy.Metrics
+import org.grails.plugins.metrics.groovy.Metrics
 
 import java.util.concurrent.TimeUnit
 

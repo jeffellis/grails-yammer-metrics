@@ -1,4 +1,4 @@
-package org.grails.plugins.yammermetrics.groovy
+package org.grails.plugins.metrics.groovy
 
 import com.codahale.metrics.Counter
 import com.codahale.metrics.Histogram
@@ -20,7 +20,7 @@ class Metrics {
     private static final MetricRegistry builtInRegistry = new MetricRegistry()
 
     // ignore org.springsource.loaded.ri.ReflectiveInterceptor when not running as a war, and ignore this class for convenience
-    static final List<String> extraIgnoredPackages = ["org.springsource.loaded.ri", "org.grails.plugins.yammermetrics.groovy"]
+    static final List<String> extraIgnoredPackages = ["org.springsource.loaded.ri", "org.grails.plugins.metrics.groovy"]
 
     private static String expandNameToIncludeCallingClass(String metricName) {
         Class callingClass = ReflectionUtils.getCallingClass(0, extraIgnoredPackages)

@@ -1,7 +1,7 @@
 package com.codahale.metrics.groovy
 
 import com.codahale.metrics.Timer
-import org.grails.plugins.yammermetrics.groovy.Metrics
+import org.grails.plugins.metrics.groovy.Metrics
 
 class TimedTest extends GroovyTestCase {
     SampleObject sample

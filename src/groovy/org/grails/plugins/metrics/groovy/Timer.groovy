@@ -1,7 +1,7 @@
 /*
  * Copyright 2013 Jeff Ellis
  */
-package org.grails.plugins.yammermetrics.groovy
+package org.grails.plugins.metrics.groovy
 
 import org.apache.commons.logging.LogFactory
 
