@@ -69,11 +69,6 @@ class Metrics {
         return registry.timer(metricName)
     }
 
-    static com.codahale.metrics.Timer newTimer(Class owner, String name) {
-        String metricName = MetricRegistry.name(owner, name)
-        return registry.timer(metricName)
-    }
-
     static MetricRegistry getRegistry() {
 
         // Use the registry from the servletContext if one has been configured in doWithApplicationContext (i.e., the
