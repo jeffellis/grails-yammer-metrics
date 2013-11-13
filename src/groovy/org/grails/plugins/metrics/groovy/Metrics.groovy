@@ -22,13 +22,17 @@ class Metrics {
     // ignore org.springsource.loaded.ri.ReflectiveInterceptor when not running as a war, and ignore this class for convenience
     static final List<String> extraIgnoredPackages = ["org.springsource.loaded.ri", "org.grails.plugins.metrics.groovy"]
 
-    private static String expandNameToIncludeCallingClass(String metricName) {
+    private static String buildMetricName(String metricName) {
+        if (Holders?.config?.metrics?.core?.prependClassName == false) {
+            return metricName
+        }
+
         Class callingClass = ReflectionUtils.getCallingClass(0, extraIgnoredPackages)
         return MetricRegistry.name(callingClass, metricName)
     }
 
     static Metric getOrAdd(String name, Metric metricToAdd) {
-        String metricName = expandNameToIncludeCallingClass(name)
+        String metricName = buildMetricName(name)
         Metric metric = registry.getMetrics().get(metricName)
         if (!metric) {
             metric = registry.register(metricName, metricToAdd)
@@ -41,12 +45,12 @@ class Metrics {
     }
 
     static Counter newCounter(String name) {
-        String metricName = expandNameToIncludeCallingClass(name)
+        String metricName = buildMetricName(name)
         return registry.counter(metricName)
     }
 
     static Histogram newHistogram(String name) {
-        String metricName = expandNameToIncludeCallingClass(name)
+        String metricName = buildMetricName(name)
         return registry.histogram(metricName)
     }
 
@@ -56,12 +60,12 @@ class Metrics {
     }
 
     static Meter newMeter(String name) {
-        String metricName = expandNameToIncludeCallingClass(name)
+        String metricName = buildMetricName(name)
         return registry.meter(metricName)
     }
 
     static com.codahale.metrics.Timer newTimer(String name) {
-        String metricName = expandNameToIncludeCallingClass(name)
+        String metricName = buildMetricName(name)
         return registry.timer(metricName)
     }
 

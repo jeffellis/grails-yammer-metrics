@@ -93,5 +93,6 @@ log4j = {
 }
 
 //metrics.servletUrlPattern = "/groovy-metrics/*"
-yammermetrics.servlet.rateUnit = "days"
-yammermetrics.servlet.durationUnit = "hours"
+metrics.servlet.rateUnit = "days"
+metrics.servlet.durationUnit = "hours"
+metrics.core.prependClassName = false
