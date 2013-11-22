@@ -1,6 +1,5 @@
 package org.grails.plugins.metrics.groovy.ast
 
-import org.apache.log4j.Logger
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.control.CompilePhase
 import org.codehaus.groovy.control.SourceUnit
@@ -15,8 +14,6 @@ import org.codehaus.groovy.ast.expr.*
 
 @GroovyASTTransformation(phase=CompilePhase.CANONICALIZATION)
 public class YMeteredASTTransformation implements ASTTransformation {
-
-    Logger log = Logger.getLogger(YMeteredASTTransformation.class)
 
     public void visit(ASTNode[] nodes, SourceUnit sourceUnit) {
         if((!nodes) || (!nodes[0]) || (!nodes[1]) || (!(nodes[0] instanceof AnnotationNode)) || (!(nodes[1] instanceof MethodNode))) {

@@ -1,15 +1,7 @@
 package org.grails.plugins.metrics.groovy
 
-import com.codahale.metrics.Counter
-import com.codahale.metrics.Histogram
-import com.codahale.metrics.JmxReporter
-import com.codahale.metrics.Meter
-import com.codahale.metrics.Metric
-import com.codahale.metrics.MetricFilter
-import com.codahale.metrics.MetricRegistry
-import com.codahale.metrics.Reservoir
+import com.codahale.metrics.*
 import com.codahale.metrics.servlets.MetricsServlet
-import com.codahale.metrics.Gauge
 import grails.util.Holders
 import org.codehaus.groovy.reflection.ReflectionUtils
 
@@ -64,7 +56,7 @@ class Metrics {
         return registry.meter(metricName)
     }
 
-    static com.codahale.metrics.Timer newTimer(String name) {
+    static Timer newTimer(String name) {
         String metricName = buildMetricName(name)
         return registry.timer(metricName)
     }
