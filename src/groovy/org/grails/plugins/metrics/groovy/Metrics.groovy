@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 class Metrics {
 
-    private static final MetricRegistry builtInRegistry = new MetricRegistry()
+    private static final String REGISTRY_NAME = 'org.grails.plugins.metrics'
 
     // ignore org.springsource.loaded.ri.ReflectiveInterceptor when not running as a war, and ignore this class for convenience
     static final List<String> extraIgnoredPackages = ["org.springsource.loaded.ri", "org.grails.plugins.metrics.groovy"]
@@ -62,16 +62,7 @@ class Metrics {
     }
 
     static MetricRegistry getRegistry() {
-
-        // Use the registry from the servletContext if one has been configured in doWithApplicationContext (i.e., the
-        // normal runtime case for apps using the plugin) or fall back to the built in one otherwise (e.g., unit tests
-        // which happen to touch instrumented classes)
-
-        MetricRegistry metricRegistry = Holders?.servletContext?.getAttribute(MetricsServlet.METRICS_REGISTRY) as MetricRegistry
-        if (!metricRegistry) {
-            metricRegistry = builtInRegistry
-        }
-        return metricRegistry
+        return SharedMetricRegistries.getOrCreate(REGISTRY_NAME)
     }
 
     static JmxReporter startJmxReporter(TimeUnit rateUnit = TimeUnit.SECONDS, TimeUnit durationUnit = TimeUnit.MILLISECONDS) {

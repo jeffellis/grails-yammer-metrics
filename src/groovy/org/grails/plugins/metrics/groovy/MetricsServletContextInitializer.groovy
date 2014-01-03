@@ -8,11 +8,9 @@ import java.util.concurrent.TimeUnit
 
 class MetricsServletContextInitializer extends MetricsServlet.ContextListener {
 
-    public final MetricRegistry metricRegistry = new MetricRegistry()
-
     @Override
     protected MetricRegistry getMetricRegistry() {
-        return metricRegistry
+        return Metrics.registry
     }
 
     @Override
