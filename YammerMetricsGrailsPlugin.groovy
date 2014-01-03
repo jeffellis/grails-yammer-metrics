@@ -11,7 +11,7 @@ import javax.servlet.ServletContextEvent
 class YammerMetricsGrailsPlugin {
 
 	// the plugin version
-    def version = "3.0.1-2-SNAPSHOT"
+    def version = "3.0.1-2"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.0.3 > *"
     // the other plugins this plugin depends on
@@ -24,11 +24,15 @@ class YammerMetricsGrailsPlugin {
 
     def author = "Jeff Ellis"
     def authorEmail = "codemonkey@ellises.us"
-    def title = "Grails plugin to package Coda Hale's yammer metrics jars"
+    def title = "Grails plugin to package Coda Hale's metrics jars"
     def description = '''\\
-Provides the following features:
+This plugin provides an easy way for grails apps to create application health checks and
+metrics (timers, meters, counters, histograms, etc) from Coda Hale's metrics package
+
+Pulls in the following metrics jars :
    * metrics-core
-   * metrics-servlet (wired to the /metrics end point for the app).
+   * metrics-healthchecks
+   * metrics-servlets (wired to the /metrics end point for the app).
 
 See the source code documentation on Github for more details.
 '''
