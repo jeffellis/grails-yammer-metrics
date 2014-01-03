@@ -1,12 +1,12 @@
 /*
- * Copyright 2012 Jeff Ellis
+ * Copyright 2013 Jeff Ellis
  */
 
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 
-yammermetrics.version = "2.2.0"
+metrics.core.version = "3.0.1"
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
             export = false
         }
 
-        build ':codenarc:0.17', {
+        build ":codenarc:0.19", {
             export = false
         }
 
@@ -48,8 +48,8 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-		runtime "com.yammer.metrics:metrics-core:${yammermetrics.version}"
-		runtime "com.yammer.metrics:metrics-servlet:${yammermetrics.version}"
+		runtime "com.codahale.metrics:metrics-core:${metrics.core.version}"
+		runtime "com.codahale.metrics:metrics-servlets:${metrics.core.version}"
 
     }
 }

@@ -1,4 +1,4 @@
-package org.grails.plugins.yammermetrics.groovy
+package org.grails.plugins.metrics.groovy
 
 import org.codehaus.groovy.transform.GroovyASTTransformationClass
 
@@ -13,7 +13,7 @@ import java.lang.annotation.Target
  */
 @Retention(RetentionPolicy.SOURCE)
 @Target([ElementType.METHOD])
-@GroovyASTTransformationClass(["org.grails.plugins.yammermetrics.groovy.ast.YTimedASTTransformation"])
+@GroovyASTTransformationClass(["org.grails.plugins.metrics.groovy.ast.YTimedASTTransformation"])
 public @interface Timed {
     String name() default "";
 

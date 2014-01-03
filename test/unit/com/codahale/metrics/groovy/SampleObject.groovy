@@ -1,12 +1,12 @@
-package com.yamme.metrics.groovy
+package com.codahale.metrics.groovy
 
-import org.grails.plugins.yammermetrics.groovy.GroovierMetrics
-import org.grails.plugins.yammermetrics.groovy.Metered
-import org.grails.plugins.yammermetrics.groovy.Timed
+import org.grails.plugins.metrics.groovy.Metrics
+import org.grails.plugins.metrics.groovy.Metered
+import org.grails.plugins.metrics.groovy.Timed
 
 class SampleObject {
 
-    final def existingNamedTimerInst = GroovierMetrics.newTimer('existingNamedTimerInst')
+    final def existingNamedTimerInst = Metrics.newTimer('existingNamedTimerInst')
 
     @Timed
     public void timed(){

@@ -1,12 +1,7 @@
-package com.yamme.metrics.groovy
+package com.codahale.metrics.groovy
 
-import com.yammer.metrics.core.Meter
-
-/**
- * User: GavinHogan@gmail.com
- * Date: 5/23/12
- * Time: 4:37 PM
- */
+import com.codahale.metrics.Meter
+import org.grails.plugins.metrics.groovy.Metrics
 
 class MeterTest extends GroovyTestCase {
     SampleObject sample
@@ -15,12 +10,15 @@ class MeterTest extends GroovyTestCase {
         sample = new SampleObject()
     }
 
+    void tearDown() {
+        Metrics.removeAll()
+    }
 
     void testAddingMeterField(){
         def meter = sample.hasProperty('meteredMeter')?sample.meteredMeter : null
         assertNotNull("We should generate 'meteredMeter' for metered() :> ${sample.dump()}", meter)
         if(!meter instanceof Meter){
-            fail("We should generate a com.yammer.metrics.core.meter for timed()  :> ${sample.dump()}")
+            fail("We should generate a com.codahale.metrics.meter for timed()  :> ${sample.dump()}")
         }
 
     }
@@ -33,13 +31,13 @@ class MeterTest extends GroovyTestCase {
     //Not going crazy testing the yammer code, just want to ensure that our AST is functioning.
     void testCallingMeteredMethod(){
 
-        def init = sample.meteredMeter.count.longValue()
+        def init = sample.meteredMeter.count
         def callCount = 10
         callCount.times {
             sample.metered()
         }
         Meter meter = sample.meteredMeter
-        assertEquals("We should see ${callCount+init} calls on our meter", callCount+init, meter.count() )
+        assertEquals("We should see ${callCount+init} calls on our meter", callCount+init, meter.count )
     }
 
     void testCountsSpanInstances(){
@@ -47,8 +45,8 @@ class MeterTest extends GroovyTestCase {
         def two = new SampleObject()
         def meterOne = one.anotherMeteredMeter
         def meterTwo = two.anotherMeteredMeter
-        def initOne = meterOne.count.longValue()
-        def initTwo = meterTwo.count.longValue()
+        def initOne = meterOne.count
+        def initTwo = meterTwo.count
         def callCount = 10
 
         10.times{
@@ -56,19 +54,19 @@ class MeterTest extends GroovyTestCase {
             two.anotherMetered()
         }
 
-        assertEquals("We should see ${callCount} calls on our meter", (callCount*2) + initOne, meterOne.count() )
-        assertEquals("We should see ${callCount} calls on our meter", (callCount*2) + initTwo, meterTwo.count() )
+        assertEquals("We should see ${callCount} calls on our meter", (callCount*2) + initOne, meterOne.count )
+        assertEquals("We should see ${callCount} calls on our meter", (callCount*2) + initTwo, meterTwo.count )
 
     }
 
     //Not going crazy testing the yammer code, just want to ensure that our AST is functioning.
     void testCallingMultiMetricMethod(){
-        def init = sample.multiMetricMeter.count.longValue()
+        def init = sample.multiMetricMeter.count
         def callCount = 10
         callCount.times {
             sample.multiMetric()
         }
         Meter meter = sample.multiMetricMeter
-        assertEquals("We should see ${callCount + init} calls on our meter", callCount + init, meter.count() )
+        assertEquals("We should see ${callCount + init} calls on our meter", callCount + init, meter.count   )
     }
 }

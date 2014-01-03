@@ -1,7 +1,8 @@
-package org.grails.plugins.yammermetrics.groovy.ast
+package org.grails.plugins.metrics.groovy.ast
 
-import org.grails.plugins.yammermetrics.groovy.GroovierMetrics
-import org.apache.log4j.Logger
+import com.codahale.metrics.Timer
+import org.codehaus.groovy.ast.*
+import org.codehaus.groovy.ast.expr.*
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.TryCatchStatement
@@ -11,16 +12,12 @@ import org.codehaus.groovy.syntax.Token
 import org.codehaus.groovy.syntax.Types
 import org.codehaus.groovy.transform.ASTTransformation
 import org.codehaus.groovy.transform.GroovyASTTransformation
+import org.grails.plugins.metrics.groovy.Metrics
 
 import java.lang.reflect.Modifier
 
-import org.codehaus.groovy.ast.*
-import org.codehaus.groovy.ast.expr.*
-
 @GroovyASTTransformation(phase=CompilePhase.CANONICALIZATION)
 public class YTimedASTTransformation implements ASTTransformation {
-
-    Logger log = Logger.getLogger(YTimedASTTransformation.class)
 
     public void visit(ASTNode[] nodes, SourceUnit sourceUnit) {
         if((!nodes) || (!nodes[0]) || (!nodes[1]) || (!(nodes[0] instanceof AnnotationNode)) || (!(nodes[1] instanceof MethodNode))) {
@@ -89,10 +86,10 @@ public class YTimedASTTransformation implements ASTTransformation {
             FieldNode timerField = new FieldNode(
                     timerName,
                     Modifier.PRIVATE,
-                    new ClassNode(com.yammer.metrics.core.Timer.class),
+                    new ClassNode(Timer.class),
                     new ClassNode(classNode.getClass()),
                     new StaticMethodCallExpression(
-                            new ClassNode(GroovierMetrics.class),
+                            new ClassNode(Metrics.class),
                             'newTimer',
                             new ArgumentListExpression([
                                     new ConstantExpression(timerName),

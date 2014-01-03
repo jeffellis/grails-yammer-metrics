@@ -1,13 +1,11 @@
-package org.grails.plugins.yammermetrics.groovy.ast
+package org.grails.plugins.metrics.groovy.ast
 
-import org.grails.plugins.yammermetrics.groovy.GroovierMetrics
-
-import org.apache.log4j.Logger
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.control.CompilePhase
 import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.transform.ASTTransformation
 import org.codehaus.groovy.transform.GroovyASTTransformation
+import org.grails.plugins.metrics.groovy.Metrics
 
 import java.lang.reflect.Modifier
 
@@ -17,8 +15,6 @@ import org.codehaus.groovy.ast.expr.*
 @GroovyASTTransformation(phase=CompilePhase.CANONICALIZATION)
 public class YMeteredASTTransformation implements ASTTransformation {
 
-    Logger log = Logger.getLogger(YMeteredASTTransformation.class)
-
     public void visit(ASTNode[] nodes, SourceUnit sourceUnit) {
         if((!nodes) || (!nodes[0]) || (!nodes[1]) || (!(nodes[0] instanceof AnnotationNode)) || (!(nodes[1] instanceof MethodNode))) {
             throw new RuntimeException("Internal error: wrong types: $nodes/ $sourceUnit")
@@ -26,10 +22,10 @@ public class YMeteredASTTransformation implements ASTTransformation {
         AnnotationNode annotationNode = nodes[0]
         MethodNode methodNode = nodes[1]
         String meterName = ensureMeterConfigured(annotationNode, methodNode.declaringClass, methodNode)
-        makeMeteredMethod(meterName, methodNode.declaringClass, methodNode)
+        makeMeteredMethod(meterName, methodNode)
     }
 
-    private void makeMeteredMethod(String meterName, ClassNode classNode, MethodNode methodNode){
+    private void makeMeteredMethod(String meterName, MethodNode methodNode){
         try {
             def meterCall = new ExpressionStatement (new MethodCallExpression(new VariableExpression(meterName), "mark", new ArgumentListExpression() ) )
             //Add meter call
@@ -54,10 +50,10 @@ public class YMeteredASTTransformation implements ASTTransformation {
             FieldNode timerField = new FieldNode(
                     meterName,
                     Modifier.PRIVATE,
-                    new ClassNode(com.yammer.metrics.core.Meter.class),
+                    new ClassNode(com.codahale.metrics.Meter.class),
                     new ClassNode(classNode.getClass()),
                     new StaticMethodCallExpression(
-                            new ClassNode(GroovierMetrics.class),
+                            new ClassNode(Metrics.class),
                             'newMeter',
                             new ArgumentListExpression([
                                     new ConstantExpression(meterName),
