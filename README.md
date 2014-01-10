@@ -1,7 +1,7 @@
 Grails Plugin for the Yammer Metrics Package
 =======
 
-Metrics provide a way to monitor performance characteristics and health of an application.  This plugin providing easy access 
+Metrics provide a way to monitor performance characteristics and health of an application.  This plugin provides easy access 
 to Coda Hale's metrics package from Grails applications.  For detailed information on the metrics API, see <http://metrics.codahale.com>
 
 The plugin packages the following metrics modules:
