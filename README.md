@@ -52,7 +52,7 @@ Any value supported by ```java.util.concurrent.TimeUnit``` are valid for these v
 # Global Registries
 
 Version 3.0 of the core metrics package removed the static metrics and healthcheck registries delegating the creation of them to the application.
-To make configuration within grails as automatic as possible, the plugin creates global MetricsRegistry and HealthCheckRegistry are created for use by
+To make configuration within grails as automatic as possible, the plugin creates global MetricsRegistry and HealthCheckRegistry for use by
 the application and exposes them through the AdminServlet.  To create application metrics within these registries use the ```Metrics``` and ```HealthChecks```
 factories provided by the plugin.  Metrics created through annotations are added to them automatically.
 
